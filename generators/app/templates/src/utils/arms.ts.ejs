@@ -1,0 +1,15 @@
+import { installArms } from '@ali/bp-utils';
+
+let version = '1.0.0';
+
+try {
+  version = __DEF_PUBLISH_VERSION__;
+} catch (_) {
+  // do nothing
+}
+
+installArms({
+  pid: '<%= name %>',
+  version,
+  env: process.env.ICE_CODE_MODE,
+});

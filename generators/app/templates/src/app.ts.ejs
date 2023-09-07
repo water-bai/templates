@@ -1,0 +1,49 @@
+import { defineAppConfig } from 'ice';
+import { defineSpmConfig } from '@ali/ice-plugin-spm/esm/types';
+import { setupAppear } from 'appear-polyfill';
+import '@alifd/meet-react/es/core/index.css';
+import '@/utils/arms';
+<% if(safeArea) { -%>
+import '@/utils/safe-area'
+<% } -%>
+<% if(pha) { -%>
+import type { Manifest } from '@ice/plugin-pha/esm/types';
+<% } -%>
+
+setupAppear();
+
+<% if(pha) { -%>
+export const phaManifest: Manifest = {
+  title: '<%= name %>',
+  routes: ['home']
+};
+
+<% } -%>
+<% if(miniapp) { -%>
+export const miniappManifest = {
+  window: {
+    defaultTitle: '<%= name %>',
+  },
+  routes: ['home']
+};
+
+<% } -%>
+// App config, see https://v3.ice.work/docs/guide/basic/app
+export default defineAppConfig(() => ({
+  // Set your configs here.
+  app: {
+    rootId: 'root',
+  },
+  router: {
+    type: 'browser',
+<% if(bizH5) { -%>
+    basename: '/relativePath',
+<% } -%>
+  },
+}));
+
+export const spmConfig = defineSpmConfig(() => {
+  return {
+    spmA: '<%= spmA %>',
+  };
+})

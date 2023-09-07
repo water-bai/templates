@@ -1,0 +1,35 @@
+<% if(miniapp) { -%>
+@import '@ice/miniapp-html-styles/html';
+<% } -%>
+
+body {
+  margin: 0;
+}
+
+<% if(safeArea) { -%>
+/* 安卓端和ios端的安全区css变量，在 @/utils/safe-area中使用 */
+.safe-area-variable-android {
+  --safe-area-inset-top: 30px;
+  --safe-area-inset-bottom: 0px;
+}
+
+.safe-area-variable-ios {
+  --safe-area-inset-top: constant(safe-area-inset-top);
+  --safe-area-inset-top: env(safe-area-inset-top);
+
+  --safe-area-inset-bottom: constant(safe-area-inset-bottom);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+}
+
+/* 安全区适配类名，在组件和页面中按需使用 */
+.safe-area-inset-top {
+  box-sizing: content-box;
+  padding-top: var(--safe-area-inset-top);
+}
+
+.safe-area-inset-bottom {
+  box-sizing: content-box;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+<% } -%>

@@ -1,0 +1,26 @@
+import { request } from 'ice';
+import { Message } from '@alifd/meet-react';
+
+export const submit = async (url, params = {}) => {
+  return new Promise<void>((resolve, reject) => {
+    Message.loading({});
+    request
+      .post(url, params)
+      .then((data) => {
+        Message.hide();
+        if (data?.code === 3000) {
+          resolve();
+        } else if (data.msgCode) {
+          reject(data);
+        } else {
+          Message.show({ content: '发送失败，请重试~' });
+          reject();
+        }
+      })
+      .catch(() => {
+        Message.hide();
+        Message.show({ content: '网络异常~' });
+        reject();
+      });
+  });
+};

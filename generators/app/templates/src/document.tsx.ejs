@@ -1,0 +1,59 @@
+import { Meta, Title, Links, Main, Scripts } from 'ice';
+import { isPre } from '@/utils/env'
+
+<% if(weex) { -%>
+import { WeexLink, WeexScript } from '@ali/ice-plugin-weex/esm/document';
+import { isWeex } from '@ali/uni-env'
+
+<% } -%>
+export default function Document() {
+  return (
+    <html>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="description" content="ice.js 3 lite scaffold" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+        <Meta />
+        <Title />
+        {(() => {
+          if(isPre()) {
+            return (
+              <>
+                <script src="https://g.alicdn.com/code/lib/vConsole/3.9.5/vconsole.min.js" />
+                <script>new window.VConsole()</script>
+              </>
+            )
+          }
+          return null
+        })()}
+<% if(weex) { -%>
+        {(() => {
+          if(isWeex) {
+            return <Links LinkElement={WeexLink} />
+          }
+          return <Links />
+        })()}
+<%} else { -%>
+        <Links />
+<% } -%>
+      </head>
+      <body>
+        <Main />
+<% if(weex) { -%>
+        {(() => {
+          if(isWeex) {
+            return <Scripts ScriptElement={WeexScript} />
+          }
+          return <Scripts />
+        })()}
+<%} else { -%>
+        <Scripts />
+<% } -%>
+      </body>
+    </html>
+  );
+}

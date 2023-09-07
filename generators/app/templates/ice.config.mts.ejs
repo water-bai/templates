@@ -1,0 +1,62 @@
+import { defineConfig } from "@ice/app";
+import spm from "@ali/ice-plugin-spm";
+import jsxPlus from "@ice/plugin-jsx-plus";
+import def from '@ali/ice-plugin-def';
+import defBuildArgvPlugin from '@ali/ice-plugin-def-build-argv';
+import WebpackMockViewer from "@ali/webpack-mock-viewer";
+<% if(pha) { -%>
+import pha from "@ice/plugin-pha";
+<% } -%>
+<% if(miniapp) { -%>
+import miniapp from "@ice/plugin-miniapp";
+<% } -%>
+<% if(weex) { -%>
+import weex from "@ali/ice-plugin-weex";
+<% } -%>
+
+// The project config, see https://v3.ice.work/docs/guide/basic/config
+export default defineConfig(() => ({
+  // Set your configs here.
+  plugins: [
+    spm(), 
+    jsxPlus(),
+    def(),
+    defBuildArgvPlugin(),
+<% if(pha) { -%>
+    pha({ template: true }), 
+<% } -%>
+<% if(miniapp) { -%>
+    miniapp(), 
+<% } -%>
+<% if(weex) { -%>
+    weex(), 
+<% } -%>
+  ],
+  ssg: false,
+  ssr: false,
+  splitChunks: false,
+  publicPath: './',
+  routes: {
+    // 约定式路由默认会编译pages下所有的ts文件
+    // 忽略 components、hooks、ts文件
+    ignoreFiles: ["**/components/**", "**/hooks/**", '*.ts', '*.js'],
+<% if(bizH5) { -%>
+    defineRoutes: (route) => {
+      route('index', 'index/index.tsx');
+    },
+<% } -%>
+  },
+  webpack: (webpackConfig) => {
+    if (process.env.NODE_ENV === "development") {
+      // 添加 mock viewer 插件
+      webpackConfig.plugins?.push(
+        new WebpackMockViewer({
+          // port: 9006, // 可以自定义端口
+          // open: true, // 启动是打开mock数据管理页面
+          // debug: true, // 打印消息通信日志
+        })
+      );
+    }
+    return webpackConfig;
+  },
+}));

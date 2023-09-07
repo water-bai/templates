@@ -1,0 +1,69 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.1",
+  "description": "<%= description %>",
+  "dependencies": {
+    "@ali/bp-utils": "^0.0.2-beta.11",
+    "@ali/bp-utils-mobile": "^1.0.0-beta.2",
+    "@alifd/meet-react": "^2.8.4",
+    "@ali/uni-env": "^1.4.22",
+<% if (bizH5) { -%>
+    "@ali/biz-render-app": "beta",
+<% } -%>
+<% if (miniapp) { -%>
+    "@ice/miniapp-runtime": "^1.0.1",
+    "@ice/miniapp-html-styles": "^1.0.0",
+<% } -%>
+    "@ice/runtime": "^1.0.0",
+    "appear-polyfill": "^0.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@ali/webpack-mock-viewer": "^0.4.0-beta.8",
+    "yo": "^4.3.1",
+    "@ali/generator-halo-member-rax-scripts-cloud": "0.2.5",
+<% if (pha) { -%>
+    "@ice/plugin-pha": "^1.1.0",
+<% } -%>
+<% if (miniapp) { -%>
+    "@ice/plugin-miniapp": "^1.0.0",
+<% } -%>
+<% if (weex) { -%>
+    "@ali/ice-plugin-weex": "^0.0.1-alpha.1",
+<% } -%>
+    "@ali/ice-plugin-def": "^1.0.11",
+    "@ali/ice-plugin-def-build-argv": "^1.0.0",
+    "@ali/ice-plugin-spm": "^1.0.1",
+    "@ice/app": "^3.0.3",
+    "@ice/plugin-jsx-plus": "^1.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "f2elint": "^2.2.1"
+  },
+  "scripts": {
+    "start": "ice start --mode pre",
+    "start:prod": "ice start --mode prod",
+    "build:daily": "ice build --mode pre",
+    "build": "ice build --mode prod",
+<% if (miniapp) { -%>
+    "start:wechat": "ice start --mode pre --platform wechat-miniprogram",
+    "start:ali": "ice start --mode pre --platform ali-miniapp",
+    "build:wechat": "ice build --mode prod --platform wechat-miniprogram",
+    "build:ali": "ice build --mode prod --platform ali-miniapp",
+<% } -%>
+    "create-c": "yo @ali/halo-member-rax-scripts-cloud:component --name=$npm_config_name --type=$npm_config_type --page=$npm_config_page",
+    "create-p": "yo @ali/halo-member-rax-scripts-cloud:page --name=$npm_config_name",
+    "create-s": "yo @ali/halo-member-rax-scripts-cloud:service --name=$npm_config_name",
+    "f2elint-scan": "f2elint scan",
+    "f2elint-fix": "f2elint fix"
+  },
+  "private": true,
+  "originTemplate": "@ice/lite-scaffold",
+  "husky": {
+    "hooks": {
+      "pre-commit": "f2elint commit-file-scan",
+      "commit-msg": "f2elint commit-msg-scan"
+    }
+  }
+}

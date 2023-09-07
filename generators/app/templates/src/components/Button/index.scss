@@ -1,0 +1,12 @@
+.btn {
+  $Height: 88rpx;
+
+  width: 660rpx;
+  height: $Height;
+  margin: 50rpx auto;
+  border-radius: $Height / 2;
+  color: #fff;
+  text-align: center;
+  line-height: $Height;
+  background: var(--color-gradient-btn, var(--color-brand1-6, #ff5000));
+}

@@ -1,0 +1,65 @@
+{
+  "title": "generator-halo-member-rax-scripts-cloud",
+  "type": "object",
+  "description": "业务平台-用户管理-用户&营销导购基础前端技术脚手架",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "名称",
+      "description": "项目名称,会同步生成arms项目名称"
+    },
+    "description": {
+      "type": "string",
+      "title": "描述",
+      "description": "项目描述",
+      "default": ""
+    },
+    "cssModules": {
+      "type": "boolean",
+      "title": "cssModules",
+      "description": "是否启用css Modules（该配置在商业能力模板不生效）",
+      "default": true
+    },
+    "safeArea": {
+      "type": "boolean",
+      "title": "安全区适配",
+      "description": "选是，则会生成适配安全区的css代码",
+      "default": true
+    },
+    "projectType": {
+      "type": "array",
+      "title": "应用类型",
+      "description": "选择你想要的项目类型",
+      "anyOf": [
+        {
+          "label": "商业能力H5",
+          "value": "bizH5"
+        },
+        {
+          "label": "普通h5",
+          "value": "h5"
+        },
+        {
+          "label": "PHA",
+          "value": "pha"
+        },
+        {
+          "label": "Weex(Beta)",
+          "value": "weex"
+        },
+        {
+          "label": "小程序",
+          "value": "miniapp"
+        }
+      ],
+      "default": [
+        "bizH5"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "cssModules",
+    "type"
+  ]
+}

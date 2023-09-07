@@ -1,0 +1,21 @@
+import { FC } from 'react';
+import { definePageConfig } from 'ice';
+<% if (cssModules) { -%>
+import styles from './index.module.scss';
+<% } else { -%>
+import './index.scss';
+<% } -%>
+
+const <%= page.pascalCase %>: FC = () => {
+<% if (cssModules) { -%>
+  return <div className={styles.container}><%= page.pascalCase %></div>;
+<% } else { -%>
+  return <div className="<%= page.name %>-container"><%= page.pascalCase %></div>;
+<% } -%>
+};
+
+export default <%= page.pascalCase %>;
+
+export const pageConfig = definePageConfig(() => ({
+  spmB: '<%= page.name %>',
+}));

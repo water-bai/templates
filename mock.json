@@ -1,0 +1,9 @@
+{
+  "name": "foo",
+  "description": "bar",
+  "cssModules": true,
+  "safeArea": true,
+  "projectType": [
+    "bizH5"
+  ]
+}

@@ -1,0 +1,18 @@
+import { FC } from 'react';
+<% if (cssModules) { -%>
+import styles from './index.module.scss';
+<% } else { -%>
+import './index.scss';
+<% } -%>
+
+export interface I<%= component.pascalCase %>Props {}
+
+const <%= component.pascalCase %>: FC<I<%= component.pascalCase %>Props> = (props) => {
+<% if (cssModules) { -%>
+  return <div className={styles.container}><%= component.pascalCase %></div>;
+<% } else { -%>
+  return <div className="<%= component.name %>-container"><%= component.pascalCase %></div>;
+<% } -%>
+};
+
+export default <%= component.pascalCase %>;

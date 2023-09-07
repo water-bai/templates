@@ -1,0 +1,16 @@
+import { FC } from 'react';
+<% if (cssModules && !bizH5) { -%>
+import styles from './index.module.scss';
+<% } else { -%>
+import './index.scss';
+<% } -%>
+
+const Home: FC = () => {
+  return (
+    <div className=<%- (cssModules && !bizH5) ? "{styles.container}" : '"home-container"' %>>
+      <h1>home</h1>
+    </div>
+  );
+};
+
+export default Home;

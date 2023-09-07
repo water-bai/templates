@@ -1,0 +1,21 @@
+import { Page } from '@ali/biz-render-app';
+
+import components from './components/index';
+import useConsole from '@/hooks/console';
+
+// 下面两行仅供mock使用
+import mockRenderData from './mock';
+window.renderData = mockRenderData;
+
+import './index.scss';
+
+const IndexPage = () => {
+  useConsole();
+
+  return <Page
+    data={window.renderData}
+    components={components}
+  />
+}
+
+export default IndexPage;

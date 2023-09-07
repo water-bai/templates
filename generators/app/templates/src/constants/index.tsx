@@ -1,0 +1,5 @@
+export const DIALOG_ACTION_TYPE = {
+  TOAST: 'TOAST',
+  REDIRECT: 'REDIRECT_URI',
+  POPUP: 'POPUP',
+};
